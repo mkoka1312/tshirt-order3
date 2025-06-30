@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Заказ футболки по эскизу</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #111;
+      color: white;
+      text-align: center;
+    }
+    header {
+      padding: 2rem;
+      background-color: #000;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    form {
+      background-color: #222;
+      padding: 2rem;
+      max-width: 600px;
+      margin: 2rem auto;
+      border-radius: 10px;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      text-align: left;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      margin-top: 1.5rem;
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #00cc66;
+      color: white;
+      cursor: pointer;
+    }
+    .preview {
+      margin-top: 2rem;
+    }
+    .preview img {
+      width: 300px;
+      border: 2px solid #444;
+      border-radius: 10px;
+    }
+    footer {
+      padding: 1rem;
+      background-color: #000;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Закажи свою кастомную футболку</h1>
+    <p>Загрузи эскиз и выбери расположение принта</p>
+  </header>
+
+  <form action="https://formsubmit.co/mkoka098@gmail.com" method="POST" enctype="multipart/form-data">
+    <label for="name">Имя:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email для связи:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="size">Размер футболки:</label>
+    <select id="size" name="size" required>
+      <option value="S">S</option>
+      <option value="M">M</option>
+      <option value="L">L</option>
+      <option value="XL">XL</option>
+    </select>
+
+    <label for="color">Цвет футболки:</label>
+    <input type="text" id="color" name="color" placeholder="Например: чёрный" required>
+
+    <label for="placement">Расположение принта:</label>
+    <select id="placement" name="placement">
+      <option value="На груди">На груди</option>
+      <option value="На спине">На спине</option>
+      <option value="Слева на груди">Слева на груди</option>
+      <option value="По центру">По центру</option>
+    </select>
+
+    <label for="file">Загрузить эскиз:</label>
+    <input type="file" id="file" name="attachment" accept="image/*,application/pdf" required>
+
+    <label for="message">Комментарий или пожелания:</label>
+    <textarea id="message" name="message" rows="4"></textarea>
+
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_subject" value="Новый заказ на футболку">
+
+    <label>
+      <input type="checkbox" required>
+      Я согласен(а) на обработку персональных данных и размещение моего дизайна на футболке.
+    </label>
+
+    <button type="submit">Отправить заказ</button>
+  </form>
+
+  <div class="preview">
+    <h2>Пример предпросмотра:</h2>
+    <img src="https://via.placeholder.com/300x400?text=Футболка+с+эскизом" alt="Превью футболки">
+  </div>
+
+  <footer>
+    &copy; 2025 Мой бренд. Все права защищены.
+  </footer>
+</body>
+</html>
