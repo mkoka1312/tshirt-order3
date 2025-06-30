@@ -8,19 +8,20 @@
     body {
       margin: 0;
       font-family: sans-serif;
-      background-color: #111;
+      background: url('https://images.unsplash.com/photo-1618354691373-d851b4fc1e51?auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;
+      background-size: cover;
       color: white;
       text-align: center;
     }
     header {
       padding: 2rem;
-      background-color: #000;
+      background-color: rgba(0, 0, 0, 0.7);
     }
     h1 {
       font-size: 2rem;
     }
     form {
-      background-color: #222;
+      background-color: rgba(0, 0, 0, 0.8);
       padding: 2rem;
       max-width: 600px;
       margin: 2rem auto;
@@ -50,15 +51,27 @@
     }
     .preview {
       margin-top: 2rem;
+      position: relative;
+      display: inline-block;
     }
-    .preview img {
+    .preview img#shirt {
       width: 300px;
       border: 2px solid #444;
       border-radius: 10px;
     }
+    .preview img#print-preview {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 150px;
+      max-height: 150px;
+      display: none;
+      pointer-events: none;
+    }
     footer {
       padding: 1rem;
-      background-color: #000;
+      background-color: rgba(0, 0, 0, 0.7);
       font-size: 0.9rem;
     }
   </style>
@@ -88,15 +101,15 @@
     <input type="text" id="color" name="color" placeholder="Например: чёрный" required>
 
     <label for="placement">Расположение принта:</label>
-    <select id="placement" name="placement">
-      <option value="На груди">На груди</option>
-      <option value="На спине">На спине</option>
-      <option value="Слева на груди">Слева на груди</option>
-      <option value="По центру">По центру</option>
+    <select id="placement" name="placement" onchange="updatePrintPosition()">
+      <option value="center">На груди</option>
+      <option value="back">На спине</option>
+      <option value="left">Слева на груди</option>
+      <option value="top">По центру</option>
     </select>
 
     <label for="file">Загрузить эскиз:</label>
-    <input type="file" id="file" name="attachment" accept="image/*,application/pdf" required>
+    <input type="file" id="file" name="attachment" accept="image/*" required onchange="previewPrint(event)">
 
     <label for="message">Комментарий или пожелания:</label>
     <textarea id="message" name="message" rows="4"></textarea>
@@ -114,11 +127,50 @@
 
   <div class="preview">
     <h2>Пример предпросмотра:</h2>
-    <img src="https://via.placeholder.com/300x400?text=Футболка+с+эскизом" alt="Превью футболки">
+    <img id="shirt" src="https://via.placeholder.com/300x400?text=Футболка" alt="Футболка">
+    <img id="print-preview" alt="Эскиз превью">
   </div>
 
   <footer>
     &copy; 2025 Мой бренд. Все права защищены.
   </footer>
+
+  <script>
+    function previewPrint(event) {
+      const print = document.getElementById('print-preview');
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          print.src = e.target.result;
+          print.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function updatePrintPosition() {
+      const placement = document.getElementById('placement').value;
+      const print = document.getElementById('print-preview');
+      switch (placement) {
+        case 'center':
+          print.style.top = '80px';
+          print.style.left = '50%';
+          break;
+        case 'left':
+          print.style.top = '80px';
+          print.style.left = '30%';
+          break;
+        case 'top':
+          print.style.top = '40px';
+          print.style.left = '50%';
+          break;
+        case 'back':
+          print.style.top = '220px';
+          print.style.left = '50%';
+          break;
+      }
+    }
+  </script>
 </body>
 </html>
